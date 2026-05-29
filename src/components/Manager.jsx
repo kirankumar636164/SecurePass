@@ -32,7 +32,7 @@ const Manager = () => {
       class="border border-purple-800 focus:outline-violet-500 rounded-full w-full px-4 py-1" 
     />
   </div>
-  <button class="flex justify-center items-center    bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full hover:cursor-pointer">
+  <button className="flex justify-center items-center mt-6   bg-purple-600 hover:bg-purple-700 text-white font-bold py-1 px-4 rounded-full hover:cursor-pointer">
   <lord-icon
     src="https://cdn.lordicon.com/efxgwrkc.json"
     trigger="hover">
