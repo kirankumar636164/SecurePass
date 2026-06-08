@@ -1,10 +1,19 @@
 import {useRef} from "react"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 const Manager = () => {
     const ref = useRef();
     const [form, setform] = useState({site: "", username:"", password: ""});
     const [showpass, setshowpass] = useState(false);
+    const [passwordArray, setpasswordArray] = useState([])
+
+    useEffect(() => {
+      let passwords = localStorage.getItem("passwords");
+      if (passwords){
+        setpasswordArray(JSON.parse(passwords))
+      }
+    }, [])
+    
     const showPassword = () => {
         ref.current.src.includes("eye.png") ? ref.current.src = "./icons/eyecross.png" : ref.current.src = "./icons/eye.png";
         setshowpass(!showpass);    
@@ -14,6 +23,14 @@ const Manager = () => {
       setform({...form, [e.target.name] : e.target.value})
     }
     
+    const savePassword = () => {
+      setpasswordArray([...passwordArray, form]);
+      localStorage.setItem( "passwords", JSON.stringify([...passwordArray, form]));
+      setform({ site: "", username: "", password: "" });
+      console.log([...passwordArray, form]);
+    }
+    
+
     return (
        <>
   {/* Background */}
@@ -80,7 +97,7 @@ const Manager = () => {
     </div>
 
     {/* Button */}
-    <button className="mt-6 flex items-center justify-center gap-2 rounded-full bg-purple-600 px-6 py-2 font-bold text-white transition hover:cursor-pointer hover:bg-purple-700">
+    <button className="mt-6 flex items-center justify-center gap-2 rounded-full bg-purple-600 px-6 py-2 font-bold text-white transition hover:cursor-pointer hover:bg-purple-700" onClick={savePassword}>
 
       <lord-icon
         src="https://cdn.lordicon.com/efxgwrkc.json"
